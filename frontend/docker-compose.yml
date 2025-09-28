@@ -1,0 +1,17 @@
+services:
+  admin-panel:
+    build:
+      context: ./admin-panel/app
+      dockerfile: Dockerfile
+      args:
+        # build time variables
+        DATABASE_URL: ${DATABASE_URL}
+        MINIO_ENDPOINT: ${MINIO_ENDPOINT}
+        MINIO_SSL: ${MINIO_SSL}
+        NEXT_PUBLIC_ORDER_SERVICE_URL: ${NEXT_PUBLIC_ORDER_SERVICE_URL}
+    container_name: admin-panel
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - .env

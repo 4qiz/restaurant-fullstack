@@ -1,0 +1,46 @@
+services:
+  restaurant-app:
+    container_name: restaurant-app
+    hostname: restaurant-app
+    build:
+      context: ./restaurant
+      dockerfile: prod2.Dockerfile
+      args:
+        # build time variables
+        DATABASE_URL: ${DATABASE_URL}
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
+        NEXT_PUBLIC_DADATA_TOKEN: ${NEXT_PUBLIC_DADATA_TOKEN}
+        NEXT_PUBLIC_ORDER_SERVICE_URL: ${NEXT_PUBLIC_ORDER_SERVICE_URL}
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+    env_file:
+      - path: .env
+        required: true
+    volumes:
+      - ./photos:/restaurant/public/photos
+    labels:
+      traefik.enable: true
+      traefik.docker.network: traefik-public
+
+      traefik.http.routers.restaurant-app-http.rule: Host(`${RESTAURANT_APP_DOMAIN}`)
+      traefik.http.routers.restaurant-app-http.entrypoints: http
+      traefik.http.routers.restaurant-app-http.middlewares: https-redirect
+      traefik.http.routers.restaurant-app-http.service: restaurant-app-service
+
+      traefik.http.routers.restaurant-app-https.rule: Host(`${RESTAURANT_APP_DOMAIN}`)
+      traefik.http.routers.restaurant-app-https.entrypoints: https
+      traefik.http.routers.restaurant-app-https.tls: true
+      traefik.http.routers.restaurant-app-https.tls.certresolver: le
+      traefik.http.routers.restaurant-app-https.service: restaurant-app-service
+
+      traefik.http.services.restaurant-app-service.loadbalancer.server.port: 3001
+      traefik.http.middlewares.restaurant-app-headers.headers.customrequestheaders.X-Forwarded-Proto: https
+    networks:
+      - traefik-public
+
+networks:
+  default:
+    driver: bridge
+  traefik-public:
+    external: true

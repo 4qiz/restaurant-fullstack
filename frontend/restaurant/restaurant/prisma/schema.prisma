@@ -1,0 +1,291 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// S3 file
+model File {
+  fileId String @id @default(cuid())
+
+  bucket String?
+  fileName String?
+  originalName String?
+  size Float?
+  url String?
+
+  createdAt DateTime @default(now())
+}
+// </S3 file>
+
+// Employee user
+model EmployeeUser {
+  id            String          @id @default(cuid())
+  name          String
+  email         String          @unique
+  emailVerified DateTime?       @default(now())
+  image         String?
+  role          UserRole @default(USER)
+  password String
+  isActive Boolean @default(true)
+lastEnterDate DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum UserRole {
+  USER 
+  ADMIN
+  MANAGER
+  DELIVERY
+}
+// </Employee user 
+
+// Default User
+model User {
+  id            String          @id @default(cuid())
+  fullName String
+  email    String @unique
+  password String
+  phoneNumber String?
+  address String?
+
+  role             UserRole          @default(USER)
+  orders           Order[]
+  cart             Cart?
+  verificationCode VerificationCode?
+
+  provider   String?
+  providerId String?
+
+  verified  DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model VerificationCode {
+  id Int @id @default(autoincrement())
+
+  userId String  @unique
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  code String
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, code])
+}
+
+model NewPasswordToken {
+  token String @id 
+  email String
+  expires DateTime
+
+  @@unique([email, token])
+}
+// </Default User>
+
+// Stories
+model Story {
+  id              Int    @id @default(autoincrement())
+  previewImageUrl String
+
+// todo: make reordable stories
+  order           Int    @default(0) 
+  isActive Boolean @default(true)
+
+  items StoryItem[]
+  createdAt DateTime @default(now())
+}
+
+model StoryItem {
+  id Int @id @default(autoincrement())
+
+  storyId Int
+  story   Story @relation(fields: [storyId], references: [id], onDelete: Cascade)
+
+  sourceUrl String
+  createdAt DateTime @default(now())
+}
+// </Stories>
+
+// Menu 
+model Category {
+  id       Int       @id @default(autoincrement())
+  name     String
+  products Product[]
+}
+
+model Product {
+  id       Int    @id @default(autoincrement())
+
+  name     String
+  imageUrl String
+  description String?
+
+  items       ProductItem[]
+  ingredients Ingredient[] //additional ingredients
+
+  isActive  Boolean @default(true)
+  isDeleted Boolean @default(false)
+
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+//вариация продукта
+model ProductItem {
+  id        Int @id @default(autoincrement())
+
+  price     Int
+  weight    Int
+  isActive  Boolean @default(true)
+
+  productItemSize ProductItemSize @default(MEDIUM)
+  measureUnit MeasureUnit @default(GRAM)
+
+  size      Int?
+  productType Int?
+
+  cartItems CartItem[]
+
+  productId Int
+  product   Product @relation(fields: [productId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([productId, productItemSize])
+}
+
+enum MeasureUnit {
+  GRAM // граммы
+  MILLILITERS // милилитры
+  PIECES //штуки
+}
+
+enum ProductItemSize {
+  SMALL
+  MEDIUM
+  BIG
+}
+
+model Ingredient {
+  id Int @id @default(autoincrement())
+
+  name     String
+  price    Int
+  imageUrl String
+
+  cartItems CartItem[]
+  products  Product[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+// </Menu>
+
+// Cart 
+model Cart {
+  id Int @id @default(autoincrement())
+
+  token String
+  totalAmount Int @default(0)
+
+  userId String?  @unique
+  user   User? @relation(fields: [userId], references: [id])
+
+  items CartItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+/// <summary>
+/// Товар в корзине
+/// </summary> 
+model CartItem {
+  id Int @id @default(autoincrement())
+  quantity    Int @default(1)
+
+  productItemId Int
+  productItem   ProductItem @relation(fields: [productItemId], references: [id])
+
+  cartId Int
+  cart   Cart @relation(fields: [cartId], references: [id])
+
+  ingredients Ingredient[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+// </Cart>
+
+// Order
+model Order {
+  id Int @id @default(autoincrement())
+
+  paymentId   String?
+  paymentUrl String?
+  token String
+  totalAmount Int
+  deliveryPrice Int
+  items Json?
+
+  status      OrderStatus @default(PENDING)
+  type        OrderType 
+  paymentType PaymentType
+  hasPaid Boolean @default(false)
+
+  fullName String
+  address  String
+  email    String
+  phone    String
+  comment  String?
+
+  userId String
+  user   User @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum OrderStatus {
+  PENDING // Ожидает оплаты
+  SUCCEEDED // Оплачен // TODO: delete
+  CANCELLED // не оплачен, финальный статус
+
+  CREATED // создан
+  COOKING // готовится
+  WAITINGDELIVERY // Ожидает курьера
+  INDELIVERY // в процессе доставки
+  READYFORPICK // готов, ожидает получения
+  RECEIVED // получен, финальный статус
+  REFUND // возврат сретств
+}
+
+enum OrderType {
+  DELIVERY //доставка
+  SELFPICK // самовывоз
+}
+
+enum PaymentType {
+  ONLINE // на сайте
+  OFFLINE // при получении
+}
+// </Order>
+
+// Delivery
+model DeliveryPrice {
+  id         String  @id @default(uuid()) // Уникальный ID
+  city       String  // Город 
+  price      Int // Цена доставки для этого города
+}

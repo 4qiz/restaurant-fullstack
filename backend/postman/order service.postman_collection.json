@@ -1,0 +1,338 @@
+{
+	"info": {
+		"_postman_id": "7f9d5501-6827-4c5c-b94a-29382c6c0bc1",
+		"name": "order service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42660937"
+	},
+	"item": [
+		{
+			"name": "statistics",
+			"item": [
+				{
+					"name": "/api/statistics/top-products-chart",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/api/statistics/top-products-chart",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"statistics",
+								"top-products-chart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/statistics/revenue-chart-data",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/api/statistics/revenue-chart-data?filter=day",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"statistics",
+								"revenue-chart-data"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "day"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/statistics/avg-bill",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/api/statistics/avg-bill",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"statistics",
+								"avg-bill"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "/api/orders",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoi0JDQtNC80LjQvdC40YHRgtGA0LDRgtC-0YAiLCJlbWFpbCI6ImFkbWluQHRlc3QucnUiLCJpZCI6ImNtN3RjMnRyYjAwMDBkNnVjNmJhMmxpbWkiLCJyb2xlIjoiQURNSU4iLCJqdGkiOiIxYjhkOTE2YS1iNjE2LTQ1OWEtYWM3OC05MjJjMTcxMDVlOTgiLCJpYXQiOjE3NDExNjk4NDQsImV4cCI6MTc0MTc3NDY0NCwiYXVkIjoiYXBpLjRxaXoucnUiLCJpc3MiOiI0cWl6LnJ1In0.D-uA2KHzOTJZR-wxm0fUcH5udU93LYQeNlAiGpXMtpI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/api/orders",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"orders"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/api/order",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/api/order",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"order"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 01 Mar 2025 09:58:32 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"orderId\": 9,\n        \"userId\": 2,\n        \"fullName\": \"Анна Смирнова\",\n        \"email\": \"anna.smirnova@test.ru\",\n        \"phone\": \"+7 (960) 212-34-78\",\n        \"address\": \"г Архангельск\",\n        \"comment\": \"\",\n        \"totalAmount\": 2020,\n        \"status\": \"PENDING\",\n        \"type\": \"DELIVERY\",\n        \"paymentType\": \"OFFLINE\",\n        \"items\": [\n            {\n                \"productId\": 4,\n                \"name\": \"Сырное филе цыпленка\",\n                \"productItemId\": 24,\n                \"price\": 670,\n                \"weight\": 550,\n                \"productItemSize\": \"BIG\",\n                \"measureUnit\": \"GRAM\",\n                \"quantity\": 1,\n                \"ingredients\": []\n            },\n            {\n                \"productId\": 4,\n                \"name\": \"Сырное филе цыпленка\",\n                \"productItemId\": 4,\n                \"price\": 550,\n                \"weight\": 320,\n                \"productItemSize\": \"MEDIUM\",\n                \"measureUnit\": \"GRAM\",\n                \"quantity\": 2,\n                \"ingredients\": []\n            }\n        ],\n        \"createdAt\": \"2025-02-27T18:05:25.475Z\",\n        \"updatedAt\": \"2025-02-27T18:05:25.475Z\"\n    },\n    {\n        \"orderId\": 10,\n        \"userId\": 2,\n        \"fullName\": \"Анна Смирнова\",\n        \"email\": \"anna.smirnova@test.ru\",\n        \"phone\": \"+7 (960) 212-34-78\",\n        \"address\": \"г Архангельск\",\n        \"comment\": \"\",\n        \"totalAmount\": 2790,\n        \"status\": \"PENDING\",\n        \"type\": \"DELIVERY\",\n        \"paymentType\": \"OFFLINE\",\n        \"items\": [\n            {\n                \"productId\": 4,\n                \"name\": \"Сырное филе цыпленка\",\n                \"productItemId\": 4,\n                \"price\": 550,\n                \"weight\": 320,\n                \"productItemSize\": \"MEDIUM\",\n                \"measureUnit\": \"GRAM\",\n                \"quantity\": 1,\n                \"ingredients\": []\n            },\n            {\n                \"productId\": 3,\n                \"name\": \"Стейк из свинины\",\n                \"productItemId\": 3,\n                \"price\": 650,\n                \"weight\": 250,\n                \"productItemSize\": \"MEDIUM\",\n                \"measureUnit\": \"GRAM\",\n                \"quantity\": 1,\n                \"ingredients\": []\n            },\n            {\n                \"productId\": 4,\n                \"name\": \"Сырное филе цыпленка\",\n                \"productItemId\": 24,\n                \"price\": 670,\n                \"weight\": 550,\n                \"productItemSize\": \"BIG\",\n                \"measureUnit\": \"GRAM\",\n                \"quantity\": 2,\n                \"ingredients\": []\n            }\n        ],\n        \"createdAt\": \"2025-02-27T18:32:52.06Z\",\n        \"updatedAt\": \"2025-02-27T18:32:52.06Z\"\n    },\n    {\n        \"orderId\": 12,\n        \"userId\": 2,\n        \"fullName\": \"Анна Смирнова\",\n        \"email\": \"anna.smirnova@test.ru\",\n        \"phone\": \"+7 (960) 212-34-78\",\n        \"address\": \"г Архангельск\",\n        \"comment\": \"лоывамт\",\n        \"totalAmount\": 800,\n        \"status\": \"PENDING\",\n        \"type\": \"DELIVERY\",\n        \"paymentType\": \"OFFLINE\",\n        \"items\": [\n            {\n                \"productId\": 4,\n                \"name\": \"Сырное филе цыпленка\",\n                \"productItemId\": 4,\n                \"price\": 550,\n                \"weight\": 320,\n                \"productItemSize\": \"MEDIUM\",\n                \"measureUnit\": \"GRAM\",\n                \"quantity\": 1,\n                \"ingredients\": []\n            }\n        ],\n        \"createdAt\": \"2025-02-28T13:51:27.307Z\",\n        \"updatedAt\": \"2025-02-28T13:51:27.307Z\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "/api/orders/{id}",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoi0JDQtNC80LjQvdC40YHRgtGA0LDRgtC-0YAiLCJlbWFpbCI6ImFkbWluQHRlc3QucnUiLCJpZCI6ImNtN3RjMnRyYjAwMDBkNnVjNmJhMmxpbWkiLCJyb2xlIjoiQURNSU4iLCJqdGkiOiIxYjhkOTE2YS1iNjE2LTQ1OWEtYWM3OC05MjJjMTcxMDVlOTgiLCJpYXQiOjE3NDExNjk4NDQsImV4cCI6MTc0MTc3NDY0NCwiYXVkIjoiYXBpLjRxaXoucnUiLCJpc3MiOiI0cWl6LnJ1In0.D-uA2KHzOTJZR-wxm0fUcH5udU93LYQeNlAiGpXMtpI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/api/orders/2",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"orders",
+						"2"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/api/orders/{id}",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/api/orders/2",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"orders",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 05 Mar 2025 12:50:39 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"orderId\": 2,\n    \"userId\": \"cm7tc2ufx0005d6ucn4kh57rq\",\n    \"fullName\": \"Анна Смирнова\",\n    \"email\": \"anna.smirnova@test.ru\",\n    \"phone\": \"+7 (960) 212-34-78\",\n    \"address\": \"г Архангельск\",\n    \"comment\": \"Положите палочки для суши и соевый соус, не звоните на телефон, напишите смс\",\n    \"totalAmount\": 2960,\n    \"status\": \"CREATED\",\n    \"type\": \"DELIVERY\",\n    \"paymentType\": \"OFFLINE\",\n    \"hasPaid\": false,\n    \"items\": [\n        {\n            \"productId\": 1,\n            \"name\": \"Куриные котлеты с пюре\",\n            \"imageUrl\": \"/photos/main/kotlets-with-red.webp\",\n            \"productItemId\": 1,\n            \"price\": 490,\n            \"weight\": 300,\n            \"productItemSize\": \"MEDIUM\",\n            \"measureUnit\": \"GRAM\",\n            \"quantity\": 1,\n            \"ingredients\": []\n        },\n        {\n            \"productId\": 13,\n            \"name\": \"Салат с креветками\",\n            \"imageUrl\": \"/photos/salats/salad-shrimps.webp\",\n            \"productItemId\": 13,\n            \"price\": 580,\n            \"weight\": 210,\n            \"productItemSize\": \"MEDIUM\",\n            \"measureUnit\": \"GRAM\",\n            \"quantity\": 1,\n            \"ingredients\": []\n        },\n        {\n            \"productId\": 19,\n            \"name\": \"Кофе Кокосовый латте\",\n            \"imageUrl\": \"https://media.dodostatic.net/image/r:292x292/11EE7D61B19FA07090EE88B0ED347F42.webp\",\n            \"productItemId\": 19,\n            \"price\": 280,\n            \"weight\": 300,\n            \"productItemSize\": \"MEDIUM\",\n            \"measureUnit\": \"GRAM\",\n            \"quantity\": 2,\n            \"ingredients\": []\n        },\n        {\n            \"productId\": 23,\n            \"name\": \"Тарталетка с малиной\",\n            \"imageUrl\": \"/photos/deserts/malina.webp\",\n            \"productItemId\": 23,\n            \"price\": 250,\n            \"weight\": 300,\n            \"productItemSize\": \"MEDIUM\",\n            \"measureUnit\": \"GRAM\",\n            \"quantity\": 2,\n            \"ingredients\": []\n        },\n        {\n            \"productId\": 6,\n            \"name\": \"Куриный суп с лапшой\",\n            \"imageUrl\": \"/photos/soups/soup-chicken-pasta.webp\",\n            \"productItemId\": 6,\n            \"price\": 290,\n            \"weight\": 300,\n            \"productItemSize\": \"MEDIUM\",\n            \"measureUnit\": \"GRAM\",\n            \"quantity\": 2,\n            \"ingredients\": []\n        }\n    ],\n    \"createdAt\": \"2025-03-05T11:45:32.606Z\",\n    \"updatedAt\": \"2025-03-05T11:45:32.606Z\"\n}"
+				}
+			]
+		},
+		{
+			"name": "/api/orders",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoi0JDQvdC90LAg0KHQvNC40YDQvdC-0LLQsCIsImVtYWlsIjoiYW5uYS5zbWlybm92YUB0ZXN0LnJ1Iiwic3ViIjoiMiIsImlkIjoiMiIsInJvbGUiOiJVU0VSIiwianRpIjoiYzkyYmNhOGEtODE5MC00ZTU1LWFkZWUtNDYzY2FmZjc3ZjViIiwiaWF0IjoxNzQwNjQ0NjQwLCJleHAiOjE3NDEyNDk0NDAsImF1ZCI6ImFwaS40cWl6LnJ1IiwiaXNzIjoiNHFpei5ydSJ9.SkFS4qpoawJ6OOnuFffQGXrpeqQST7I-X-7jB64vEkY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"OrderId\": 4,\r\n  \"UserId\": \"asdf\",\r\n  \"FullName\": \"John Doe\",\r\n  \"Email\": \"johndoe@example.com\",\r\n  \"Phone\": \"+1234567890\",\r\n  \"Address\": \"123 Main St, Springfield, USA\",\r\n  \"Comment\": \"Leave at the front door\",\r\n  \"TotalAmount\": 49.99,\r\n  \"Status\": \"PENDING\",\r\n  \"Type\": \"SELFPICK\",\r\n  \"PaymentType\": \"ONLINE\",\r\n  \"CreatedAt\": \"2025-02-27T14:00:00Z\",\r\n  \"UpdatedAt\": \"2025-02-27T14:05:00Z\",\r\n  \"Items\": [\r\n    {\r\n      \"ProductId\": 10,\r\n      \"Name\": \"Cheese Pizza\",\r\n      \"ProductItemId\": 101,\r\n      \"Price\": 15.99,\r\n      \"Weight\": 500,\r\n      \"ProductItemSize\": \"MEDIUM\",\r\n      \"MeasureUnit\": \"GRAM\",\r\n      \"Quantity\": 1,\r\n      \"Ingredients\": [\r\n        {\r\n          \"IngredientId\": 1,\r\n          \"Name\": \"Cheese\",\r\n          \"Price\": 2.50\r\n        },\r\n        {\r\n          \"IngredientId\": 2,\r\n          \"Name\": \"Tomato Sauce\",\r\n          \"Price\": 1.50\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \"ProductId\": 11,\r\n      \"Name\": \"Spaghetti Carbonara\",\r\n      \"ProductItemId\": 102,\r\n      \"Price\": 12.99,\r\n      \"Weight\": 350,\r\n      \"ProductItemSize\": \"MEDIUM\",\r\n      \"MeasureUnit\": \"GRAM\",\r\n      \"Quantity\": 1,\r\n      \"Ingredients\": [\r\n        {\r\n          \"IngredientId\": 3,\r\n          \"Name\": \"Bacon\",\r\n          \"Price\": 3.00\r\n        },\r\n        {\r\n          \"IngredientId\": 4,\r\n          \"Name\": \"Parmesan\",\r\n          \"Price\": 2.00\r\n        }\r\n      ]\r\n    }\r\n  ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/api/orders",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/orders/{id}/status",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoi0JDQtNC80LjQvdC40YHRgtGA0LDRgtC-0YAiLCJlbWFpbCI6ImFkbWluQHRlc3QucnUiLCJpZCI6ImNtN3RjMnRyYjAwMDBkNnVjNmJhMmxpbWkiLCJyb2xlIjoiQURNSU4iLCJqdGkiOiI5ZjJmOWNmNS03MDdlLTQ2ZWMtYjA4YS1hYzQ0ZTYzOTdkM2YiLCJpYXQiOjE3NDExNzc5NjIsImV4cCI6MTc0MTc4Mjc2MiwiYXVkIjoiYXBpLjRxaXoucnUiLCJpc3MiOiI0cWl6LnJ1In0.XKoYfD-C6ZAHnOIveeyec5cRH4nvgCuX1tEXkOy_Wd0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/api/orders/3/status?isCancelled=false",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"orders",
+						"3",
+						"status"
+					],
+					"query": [
+						{
+							"key": "isCancelled",
+							"value": "false"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseurl",
+			"value": "localhost:5046",
+			"type": "string"
+		}
+	]
+}
