@@ -364,4 +364,7 @@ FodyWeavers.xsd
 
 **/appsettings.json
 
-.env
+# .env
+
+ps-data/
+minio-data/

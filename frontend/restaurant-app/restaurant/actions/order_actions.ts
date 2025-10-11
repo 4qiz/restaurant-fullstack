@@ -1,11 +1,12 @@
-"use server";
+'use server';
 
-import { prisma } from "@/prisma/prisma-client";
-//import { sendEmail } from "@/shared/lib/send-email";
-import { getUserSession } from "@/shared/lib/get-user-session";
-import { Prisma } from "@prisma/client";
-import { hashSync } from "bcrypt";
-import { VerifyUserEmailTemplate } from "@/shared/components/shared/email-templates/verify-user";
+import {prisma} from '@/prisma/prisma-client';
+// import { sendEmail } from "@/shared/lib/send-email";
+//  import { VerifyUserEmailTemplate } from
+//  "@/shared/components/shared/email-templates/verify-user";
+import {getUserSession} from '@/shared/lib/get-user-session';
+import {Prisma} from '@prisma/client';
+import {hashSync} from 'bcrypt';
 
 export async function registerUser(body: Prisma.UserCreateInput) {
   try {
@@ -20,7 +21,7 @@ export async function registerUser(body: Prisma.UserCreateInput) {
       //   throw new Error("Почта не подтверждена");
       // }
 
-      throw new Error("Пользователь уже существует");
+      throw new Error('Пользователь уже существует');
     }
 
     const createdUser = await prisma.user.create({
@@ -51,7 +52,7 @@ export async function registerUser(body: Prisma.UserCreateInput) {
     //   )
     // );
   } catch (error) {
-    console.log("Error [CREATE_USER]", error);
+    console.log('Error [CREATE_USER]', error);
     throw error;
   }
 }
@@ -61,7 +62,7 @@ export async function updateUserInfo(fullName: string) {
     const currentUser = await getUserSession();
 
     if (!currentUser) {
-      throw new Error("Пользователь не найден в сессии");
+      throw new Error('Пользователь не найден в сессии');
     }
 
     const user = await prisma.user.findUnique({
@@ -70,7 +71,7 @@ export async function updateUserInfo(fullName: string) {
       },
     });
     if (!user) {
-      throw new Error("Пользователь не найден в бд");
+      throw new Error('Пользователь не найден в бд');
     }
 
     await prisma.user.update({
@@ -82,7 +83,7 @@ export async function updateUserInfo(fullName: string) {
       },
     });
   } catch (error) {
-    console.log("Error [UPDATE_USER]", error);
+    console.log('Error [UPDATE_USER]', error);
     throw error;
   }
 }
