@@ -8,12 +8,12 @@
 Built with Next.js 15, .NET 8.0, PostgreSQL, Docker, and MinIO S3.
     <br />
   </p>
-  <a href="#">
-    <img src="github_res/main_page.png" alt="main">
+  <a>
+    <img src="screens/main-page.png" alt="main">
   </a>
 
   </p>
-  <a href="#">
+  <a>
     <img src="github_res/admin_page.png" alt="main">
   </a>
 </div>
