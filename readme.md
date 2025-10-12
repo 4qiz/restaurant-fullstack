@@ -11,10 +11,14 @@ Built with Next.js 15, .NET 8.0, PostgreSQL, Docker, and MinIO S3.
   <a>
     <img src="./github_res/main-page.png" alt="main">
   </a>
-
+  <br />
   </p>
-  <a>
+    <a>
     <img src="./github_res/admin-page.png" alt="main">
+  </a>
+    <br />
+  <a>
+    <img src="./github_res/admin-page2.png" alt="main">
   </a>
 </div>
 
