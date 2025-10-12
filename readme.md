@@ -1,7 +1,7 @@
 <br />
 <div align="center">
 
-  <h2 align="center">Fullstack Restaurant Order System</h2>
+  <h2 align="center"> 🍽️ Fullstack Restaurant Order System</h2>
 
   <p align="center">
     A full-featured restaurant management system with a client-facing web app and an admin panel.
@@ -9,19 +9,14 @@ Built with Next.js 15, .NET 8.0, PostgreSQL, Docker, and MinIO S3.
     <br />
   </p>
   <a>
-    <img src="screens/main-page.png" alt="main">
+    <img src="./github_res/main-page.png" alt="main">
   </a>
 
   </p>
   <a>
-    <img src="github_res/admin_page.png" alt="main">
+    <img src="./github_res/admin-page.png" alt="main">
   </a>
 </div>
-
-# 🍽️ Fullstack Restaurant Order System
-
-A full-featured restaurant management system with a client-facing web app and an admin panel.
-Built with Next.js 15, .NET 8.0, PostgreSQL, Docker, and MinIO S3.
 
 ---
 
