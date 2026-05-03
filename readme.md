@@ -52,8 +52,6 @@ Built with Next.js 15, .NET 8.0, PostgreSQL, Docker, and MinIO S3.
 | Library | Description |
 |----------|--------------|
 | **Next.js 15** | React-based full-stack framework for SSR, routing, and optimized performance. |
-| **Prisma ORM** | Type-safe database ORM with PostgreSQL integration and schema management. |
-| **NextAuth.js** | Authentication framework with Prisma adapter for secure session handling. |
 | **Tailwind CSS** | Utility-first CSS framework for fast and responsive UI development. |
 | **Radix UI + shadcn/ui** | Accessible and customizable React UI primitives used to build modern interfaces. |
 | **Jest + ts-jest** | JavaScript/TypeScript testing framework used for frontend unit testing. |
